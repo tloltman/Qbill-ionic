@@ -14,6 +14,9 @@ Change to repo directory
 Install package dependencies
 </br>`npm install`
 
+Install Ionic CLI
+</br>`npm install -g ionic`
+
 Test the app in the browser
 <br>`ionic serve`
 
