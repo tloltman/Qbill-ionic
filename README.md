@@ -1,4 +1,4 @@
-# Qbill-ionic
+# Quibill-ionic
 A simple budget/bill management app built with the Ionic framework
 
 ## Instructions
@@ -6,7 +6,7 @@ Install Nodes.js/npm
 </br>https://nodejs.org/en/
 
 Clone repo
-</br>`git clone https://github.com/tloltman/Qbill-ionic.git yourRepoName`
+</br>`git clone https://github.com/tloltman/Quibill-ionic.git yourRepoName`
 
 Change to repo directory
 </br>`cd yourRepoName`
@@ -19,9 +19,6 @@ Install Ionic CLI
 
 Test the app in the browser
 <br>`ionic serve`
-
-## Sneak
-I'm Sneaking
 
 
 
