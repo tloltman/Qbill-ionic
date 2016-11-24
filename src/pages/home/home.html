@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="secondary">
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -7,12 +7,35 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>A simple budget/bill management app</h3>
+<ion-content>
+  <div class="remaining-budget-dollars center">
+    <span>$</span><span>{{remainingBudgetDollars}}</span>
+    <p>Remaining in budget</p>
+  </div>
+  <div class="center next-pay-date">
+    <h1 class="no-margin"><span>Next pay date: </span><span>{{nextPayDate}}</span></h1>
+  </div>
+  <ion-grid>
+    <ion-row class="main-buttons">
+      <ion-col width-50><button ion-button color="danger">Withdrawal</button></ion-col>
+      <ion-col width-50><button ion-button color="secondary">Deposit</button></ion-col>
+    </ion-row>
+    <ion-row class="secondary-buttons">
+      <ion-col width-50 class="center"><button ion-button color="danger">Recurring<br/>Withdrawal</button></ion-col>
+      <ion-col width-50 class="center"><button ion-button color="secondary">Recurring<br/>Deposit</button></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="center">
+        <button ion-button color="primary" class="button-view-transactions">View All Transactions</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
 
-  <p>
-    Insert bills here
-  </p>
-
-  <button ion-button color="secondary"><ion-icon name="cash"></ion-icon></button>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+  </ion-toolbar>
+</ion-footer>
+
