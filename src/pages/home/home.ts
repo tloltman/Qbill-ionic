@@ -8,8 +8,12 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
+  remainingBudgetDollars: number;
+  nextPayDate: string;
+  
   constructor(public navCtrl: NavController) {
-    
+    this.remainingBudgetDollars = 125.67;
+    this.nextPayDate = '11/15/2016';
   }
 
 }
