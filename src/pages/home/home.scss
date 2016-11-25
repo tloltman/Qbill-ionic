@@ -1,20 +1,36 @@
 @import "../../theme/variables";
 
+//This is just something I do to make sure I use similar colors throughout the app
+//The actual colors are stored in theme directory/variables.scss
+$primary: map-get($colors, primary);
+$secondary: map-get($colors, secondary);
+$positive: map-get($colors, positive);
+$negative: map-get($colors, negative);
+$light: map-get($colors, light);
+$dark: map-get($colors, dark);
+
 page-homepage {
-  
+  .main-content {
+    background-color: $dark;
+  }
   .remaining-budget-dollars {
     span {
       font-size: 7em;
+      color: $positive;
     }
     p {
       margin-top: 0;
       margin-bottom: 5px;
       font-weight: bold;
+      color: $light;
     }
   }
   .main-buttons {
     padding-top: 10px;
-    
+    ion-icon {
+      padding-right: 10px;
+      font-size: 3em;
+    }
     ion-col {
       height: 8em;
     }
@@ -35,9 +51,16 @@ page-homepage {
     }
   }
   div.next-pay-date {
-    background-color: map-get($colors, primary);
+    padding-top: 10px;
+    padding-bottom: 5px;
     span {
-      color: white;
+      color: $light;
     }
+  }
+  .negative {
+    color: $negative;
+  }
+  .positive {
+    color: $positive;
   }
 }
