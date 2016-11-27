@@ -11,18 +11,17 @@ $dark: map-get($colors, dark);
 
 page-homepage {
   .main-content {
-    background-color: $dark;
   }
   .remaining-budget-dollars {
     span {
       font-size: 7em;
-      color: $positive;
+      color: $primary;
     }
     p {
       margin-top: 0;
       margin-bottom: 5px;
       font-weight: bold;
-      color: $light;
+      color: $secondary;
     }
   }
   .main-buttons {
@@ -54,7 +53,7 @@ page-homepage {
     padding-top: 10px;
     padding-bottom: 5px;
     span {
-      color: $light;
+      color: $primary;
     }
   }
   .negative {
