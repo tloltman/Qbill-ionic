@@ -11,20 +11,21 @@ $dark: map-get($colors, dark);
 
 page-homepage {
   .main-content {
-    background-color: $dark;
   }
+  
   .remaining-budget-dollars {
     span {
       font-size: 7em;
-      color: $positive;
+      color: $primary;
     }
     p {
       margin-top: 0;
       margin-bottom: 5px;
       font-weight: bold;
-      color: $light;
+      color: $secondary;
     }
   }
+  
   .main-buttons {
     padding-top: 10px;
     ion-icon {
@@ -39,6 +40,7 @@ page-homepage {
       height: 100%;
     }
   }
+  
   .secondary-buttons {
     padding-top: 20px;
     
@@ -50,17 +52,24 @@ page-homepage {
       height: 80%;
     }
   }
+  
   div.next-pay-date {
     padding-top: 10px;
     padding-bottom: 5px;
     span {
-      color: $light;
+      color: $primary;
     }
   }
+  
   .negative {
     color: $negative;
   }
+  
   .positive {
     color: $positive;
+  }
+  
+  .note-item {
+    height: 300px;
   }
 }
