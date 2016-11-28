@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-
 import { NavController } from 'ionic-angular';
+import { SingleTransactionPage } from '../single-transaction/single-transaction';
 
 @Component({
   selector: 'page-homepage',
@@ -12,8 +12,7 @@ export class HomePage {
   nextPayDate: string;
   
   constructor(public navCtrl: NavController) {
-    this.remainingBudgetDollars = 125.67;
+    this.remainingBudgetDollars = 0.00;
     this.nextPayDate = '11/15/2016';
   }
-
 }
