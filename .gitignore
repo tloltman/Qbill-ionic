@@ -18,3 +18,10 @@ plugins/android.json
 plugins/ios.json
 
 .DS_Store
+
+# Visual Studio
+*.jsproj
+*.jsproj.user
+*.sln
+taco.json
+.vs/

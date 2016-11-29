@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 /*
   Generated class for the NewSingleTransaction page.
@@ -13,11 +13,14 @@ import { NavController } from 'ionic-angular';
 })
 export class SingleTransactionPage {
 
-  transactionType;
-  
-  constructor(public navCtrl: NavController) {}
+  public transactionType: string;
 
-  ionViewDidLoad() {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.transactionType = this.navParams.data;
+  }
+
+  cancelTransactionPressed() {
+    this.navCtrl.popToRoot();
   }
 
 }
