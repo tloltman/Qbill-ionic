@@ -16,25 +16,28 @@
     <h1 class="no-margin"><span>Next pay date: </span><span>{{nextPayDate}}</span></h1>
   </div>
   <ion-grid>
-    
+
     <ion-row class="main-buttons">
-      <ion-col width-50><button ion-button color="secondary"><ion-icon name="remove-circle"></ion-icon>Withdrawal</button>
+      <ion-col width-50>
+        <button ion-button color="secondary" (click)="pressedWithdraw()"><ion-icon name="remove-circle"></ion-icon>Withdrawal</button>
       </ion-col>
-      <ion-col width-50><button ion-button color="secondary" (click)="openNewDepositPage()"><ion-icon name="add-circle"></ion-icon>Deposit</button></ion-col>
+      <ion-col width-50>
+        <button ion-button color="secondary" (click)="pressedDeposit()"><ion-icon name="add-circle"></ion-icon>Deposit</button>
+      </ion-col>
     </ion-row>
-    
+
     <ion-row class="secondary-buttons">
       <ion-col width-50 class="center"><button ion-button color="secondary">Recurring<br/>Withdrawal</button></ion-col>
       <ion-col width-50 class="center"><button ion-button color="secondary">Recurring<br/>Deposit</button></ion-col>
     </ion-row>
-    
+
     <ion-row>
       <ion-col class="center">
         <button ion-button color="primary" class="button-view-transactions">View All Transactions</button>
       </ion-col>
     </ion-row>
   </ion-grid>
-  
+
 
 </ion-content>
 
