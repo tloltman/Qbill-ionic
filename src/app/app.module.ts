@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { NewTransactionPage } from '../pages/new-transaction/new-transaction';
+import { SingleTransactionPage } from '../pages/single-transaction/single-transaction';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    NewTransactionPage
+    SingleTransactionPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -17,7 +17,7 @@ import { NewTransactionPage } from '../pages/new-transaction/new-transaction';
   entryComponents: [
     MyApp,
     HomePage,
-    NewTransactionPage
+    SingleTransactionPage
   ],
   providers: []
 })
