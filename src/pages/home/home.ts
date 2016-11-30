@@ -18,8 +18,6 @@ export class HomePage {
     transactionType = [{ type: 'Make A Withdrawal' }, { type: 'Make A Deposit' }];
     // withdrawal: string = 'Make A Withdrawal';
     // deposit: string = 'Make A Deposit';
-    
-    constructor(public navCtrl: NavController) { }
   
     pressedWithdraw() {
         this.navCtrl.push(SingleTransactionPage, this.transactionType[0]);
