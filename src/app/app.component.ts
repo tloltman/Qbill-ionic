@@ -3,8 +3,6 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { HomePage } from '../pages/home/home';
-import { NewTransactionPage } from '../pages/new-transaction/new-transaction';
-
 
 @Component({
   templateUrl: 'app.html'
