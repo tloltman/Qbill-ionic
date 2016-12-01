@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 /*
   Generated class for the NewRecurringTransaction page.
@@ -13,12 +13,14 @@ import { NavController } from 'ionic-angular';
 })
 export class RecurringTransactionPage {
   
-  transactionType;
+  public transactionType: string;
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.transactionType = this.navParams.data;
+  }
 
-  ionViewDidLoad() {
-    console.log('Hello RecurringTransactionPage Page');
+  cancelTransactionPressed() {
+    this.navCtrl.popToRoot();
   }
 
 }

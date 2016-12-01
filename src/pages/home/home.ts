@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { SingleTransactionPage } from '../single-transaction/single-transaction';
+import { RecurringTransactionPage } from '../recurring-transaction/recurring-transaction';
 
 @Component({
   selector: 'page-homepage',
@@ -15,15 +16,20 @@ export class HomePage {
       this.nextPayDate = '11/15/2016';
     }
     
-    transactionType = [{ type: 'Make A Withdrawal' }, { type: 'Make A Deposit' }];
+    transactionType = [
+      {type: 'Make a Withdrawal'},
+      {type: 'Make a Deposit'},
+      {type: 'Set a Recurring Withdrawal'},
+      {type: 'Set a Recurring Deposit'}];
     // withdrawal: string = 'Make A Withdrawal';
     // deposit: string = 'Make A Deposit';
   
-    pressedWithdraw() {
-        this.navCtrl.push(SingleTransactionPage, this.transactionType[0]);
-    }
-  
-    pressedDeposit() {
-        this.navCtrl.push(SingleTransactionPage, this.transactionType[1]);     
+    pressedTransaction(typeIndex) {
+      if(typeIndex < 2) {
+        this.navCtrl.push(SingleTransactionPage, this.transactionType[typeIndex].type);
+      } else {
+        this.navCtrl.push(RecurringTransactionPage, this.transactionType[typeIndex].type);
+      }
+
     }
 }
