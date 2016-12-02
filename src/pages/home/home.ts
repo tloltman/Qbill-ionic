@@ -33,6 +33,7 @@ export class HomePage {
     }
 
     hasNextPayDate() {
+      //will return false if nextPayDate is undefined, null, or empty string ("")
       return this.nextPayDate ? true : false;
     }
 }
