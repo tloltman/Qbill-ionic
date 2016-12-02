@@ -13,7 +13,7 @@
     <p>Remaining in budget</p>
   </div>
   <div class="center next-pay-date">
-    <h1 class="no-margin"><span>Next pay date: </span><span>{{nextPayDate}}</span></h1>
+    <h1 class="no-margin" *ngIf="hasNextPayDate()"><span>Next pay date: </span><span>{{nextPayDate}}</span></h1>
   </div>
   <ion-grid>
 
