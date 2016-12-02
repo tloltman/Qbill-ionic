@@ -13,7 +13,6 @@ export class HomePage {
   
     constructor(public navCtrl: NavController) {
       this.remainingBudgetDollars = 0.00;
-      this.nextPayDate = '11/15/2016';
     }
     
     transactionType = [
@@ -31,5 +30,9 @@ export class HomePage {
         this.navCtrl.push(RecurringTransactionPage, this.transactionType[typeIndex].type);
       }
 
+    }
+
+    hasNextPayDate() {
+      return this.nextPayDate ? true : false;
     }
 }
