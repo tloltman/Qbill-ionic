@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>New Recurring {{transactionType}}</ion-title>
+    <ion-title>{{transactionType}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -30,6 +30,6 @@
     </ion-item>
   </ion-list>
   
-  <button ion-button color="light">Cancel</button>
+  <button ion-button color="light" (click)="cancelTransactionPressed()">Cancel</button>
   <button ion-button color="primary">Submit</button>
 </ion-content>
