@@ -8,15 +8,8 @@ import { RecurringTransactionPage } from '../recurring-transaction/recurring-tra
   templateUrl: 'home.html'
 })
 export class HomePage {
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-  remainingBudgetDollars: number;
-  nextPayDate: string;
-=======
     remainingBudgetDollars: number;
     nextPayDate: string;
->>>>>>> 0e9f271f0154afc90541e1495ffd774f336b26ec
   
     constructor(public navCtrl: NavController) {
       this.remainingBudgetDollars = 0.00;
@@ -39,12 +32,8 @@ export class HomePage {
 
     }
 
-<<<<<<< HEAD
->>>>>>> QB-15-buttons-on-home-page-should-open-new-transaction-pages
-=======
     hasNextPayDate() {
       //will return false if nextPayDate is undefined, null, or empty string ("")
       return this.nextPayDate ? true : false;
     }
->>>>>>> 0e9f271f0154afc90541e1495ffd774f336b26ec
 }

@@ -14,6 +14,7 @@ import { NavController, NavParams } from 'ionic-angular';
 export class RecurringTransactionPage {
   
   public transactionType: string;
+  public startDate: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.transactionType = this.navParams.data;

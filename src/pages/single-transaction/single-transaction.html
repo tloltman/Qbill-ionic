@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>{{transactionType}}</ion-title>
   </ion-navbar>
 
@@ -10,7 +10,7 @@
 <ion-content padding>
   <ion-list>
     <ion-item>
-      <ion-label floating>Amount</ion-label>
+      <ion-label floating>Amount ($)</ion-label>
       <ion-input type="number"></ion-input>
     </ion-item>
     
@@ -20,8 +20,8 @@
     </ion-item>
     
     <ion-item>
-      <ion-label floating>Date</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-label>Date</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="MMMM DD YYYY"[(ngModel)]="startDate"></ion-datetime>
     </ion-item>
   </ion-list>
   
