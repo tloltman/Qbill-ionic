@@ -14,7 +14,9 @@ export class HomePage {
     constructor(public navCtrl: NavController) {
       this.remainingBudgetDollars = 0.00;
     }
-    
+
+
+
     transactionType = [
       {type: 'Make a Withdrawal'},
       {type: 'Make a Deposit'},
@@ -22,7 +24,9 @@ export class HomePage {
       {type: 'Set a Recurring Deposit'}];
     // withdrawal: string = 'Make A Withdrawal';
     // deposit: string = 'Make A Deposit';
-  
+
+    viewTransactionsTitle: string = 'All Transactions';
+
     pressedTransaction(typeIndex) {
       if(typeIndex < 2) {
         this.navCtrl.push(SingleTransactionPage, this.transactionType[typeIndex].type);
@@ -32,8 +36,14 @@ export class HomePage {
 
     }
 
+    pressedViewTransactions() {
+        this.navCtrl.push(AllTransactionsPage, this.viewTransactionsTitle);
+    }
+
     hasNextPayDate() {
       //will return false if nextPayDate is undefined, null, or empty string ("")
       return this.nextPayDate ? true : false;
     }
+
+    
 }
