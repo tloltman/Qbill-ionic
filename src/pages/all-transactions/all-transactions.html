@@ -15,14 +15,16 @@
 <ion-content padding>
   <!--Date Range Selection-->
     <ion-label>Select Date Range:</ion-label>
-    <ion-item>
-        <ion-label>From:</ion-label>
-        <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="fromDate"></ion-datetime>
-    </ion-item>
-    <ion-item>
-        <ion-label>To:</ion-label>
-        <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="toDate"></ion-datetime>
-    </ion-item>
+    <ion-row>
+        <ion-item>
+            <ion-label>From:</ion-label>
+            <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="fromDate"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label>To:</ion-label>
+            <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="toDate"></ion-datetime>
+        </ion-item>
+    </ion-row>
     <br><br>
 
     <!--Search Bar-->
