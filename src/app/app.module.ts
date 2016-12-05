@@ -4,13 +4,15 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { SingleTransactionPage } from '../pages/single-transaction/single-transaction';
 import { RecurringTransactionPage } from '../pages/recurring-transaction/recurring-transaction';
+import { AllTransactionsPage } from '../pages/all-transactions/all-transactions';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     SingleTransactionPage,
-    RecurringTransactionPage
+    RecurringTransactionPage,
+    AllTransactionsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -20,7 +22,8 @@ import { RecurringTransactionPage } from '../pages/recurring-transaction/recurri
     MyApp,
     HomePage,
     SingleTransactionPage,
-    RecurringTransactionPage
+    RecurringTransactionPage,
+    AllTransactionsPage
   ],
   providers: []
 })
