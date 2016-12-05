@@ -8,10 +8,11 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class AllTransactionsPage {
 
-  public transactionType: string;
+
+  public viewTransactionsTitle: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.transactionType = this.navParams.data;
+    this.viewTransactionsTitle = this.navParams.data;
   }
 
   cancelTransactionPressed() {

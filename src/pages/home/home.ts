@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { SingleTransactionPage } from '../single-transaction/single-transaction';
 import { RecurringTransactionPage } from '../recurring-transaction/recurring-transaction';
+import { AllTransactionsPage } from '../all-transactions/all-transactions';
 
 @Component({
   selector: 'page-homepage',
