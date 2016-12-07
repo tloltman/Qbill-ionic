@@ -37,11 +37,17 @@
             <th><ion-label>Amount</ion-label></th>
             <th><ion-label>W/D</ion-label></th>
         </tr>
+        <tr *ngFor="let transaction of transactionService.getAllTransactions()">
+            <td>{{transaction.date}}</td>
+            <td>{{transaction.amount}}</td>
+            <td>{{transaction.type}}</td>
+        </tr>
     </table>
   
     
     <br><br>
     <button ion-button color="light" (click)="cancelTransactionPressed()">Cancel</button>
+    <button ion-button color="negative" (click)="clearTransactions()">Clear All</button>
 </ion-content>
 
 

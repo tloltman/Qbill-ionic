@@ -6,7 +6,7 @@ import { HomePage } from '../pages/home/home';
 import { SingleTransactionPage } from '../pages/single-transaction/single-transaction';
 import { RecurringTransactionPage } from '../pages/recurring-transaction/recurring-transaction';
 import { AllTransactionsPage } from '../pages/all-transactions/all-transactions';
-import { TransactionData } from '../services/transaction-data';
+import { TransactionService } from '../services/transaction-service';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,7 @@ import { TransactionData } from '../services/transaction-data';
     AllTransactionsPage
   ],
   providers: [
-    TransactionData,
+    TransactionService,
     Storage
   ]
 })
