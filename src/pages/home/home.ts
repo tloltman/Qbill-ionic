@@ -18,21 +18,20 @@ export class HomePage {
 
 
 
-    transactionType = [
-      {type: 'Make a Withdrawal'},
-      {type: 'Make a Deposit'},
-      {type: 'Set a Recurring Withdrawal'},
-      {type: 'Set a Recurring Deposit'}];
+    transactionType = Object.freeze({
+      Withdrawal: 'Withdrawal',
+      Deposit: 'Deposit'
+    });
     // withdrawal: string = 'Make A Withdrawal';
     // deposit: string = 'Make A Deposit';
 
     viewTransactionsTitle: string = 'All Transactions';
 
-    pressedTransaction(typeIndex) {
-      if(typeIndex < 2) {
-        this.navCtrl.push(SingleTransactionPage, this.transactionType[typeIndex].type);
+    pressedTransaction(recurring: boolean, transactionType: string) {
+      if(!recurring) {
+        this.navCtrl.push(SingleTransactionPage, transactionType);
       } else {
-        this.navCtrl.push(RecurringTransactionPage, this.transactionType[typeIndex].type);
+        this.navCtrl.push(RecurringTransactionPage, transactionType);
       }
 
     }

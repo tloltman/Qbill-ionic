@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import { TransactionService } from '../../services/transaction-service';
+
 /*
   Generated class for the NewSingleTransaction page.
 
@@ -15,11 +17,20 @@ export class SingleTransactionPage {
 
   public transactionType: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public amount: number;
+  public note: string;
+  public startDate: string;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public transactionService: TransactionService) {
     this.transactionType = this.navParams.data;
   }
 
   cancelTransactionPressed() {
+    this.navCtrl.popToRoot();
+  }
+
+  submitTransaction() {
+    this.transactionService.addSingleTransaction(this.amount, this.note, this.startDate, this.transactionType);
     this.navCtrl.popToRoot();
   }
 

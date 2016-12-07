@@ -19,21 +19,21 @@
 
     <ion-row class="main-buttons">
       <ion-col width-50>
-        <button ion-button color="secondary" (click)="pressedTransaction(0)">
+        <button ion-button color="secondary" (click)="pressedTransaction(false, transactionType.Withdrawal)">
           <ion-icon name="remove-circle"></ion-icon>Withdrawal</button>
       </ion-col>
       <ion-col width-50>
-        <button ion-button color="secondary" (click)="pressedTransaction(1)">
+        <button ion-button color="secondary" (click)="pressedTransaction(false, transactionType.Deposit)">
           <ion-icon name="add-circle"></ion-icon>Deposit</button>
       </ion-col>
     </ion-row>
 
     <ion-row class="secondary-buttons">
       <ion-col width-50 class="center">
-        <button ion-button color="secondary" (click)="pressedTransaction(2)">Recurring<br/>Withdrawal</button>
+        <button ion-button color="secondary" (click)="pressedTransaction(true, transactionType.Withdrawal)">Recurring<br/>Withdrawal</button>
       </ion-col>
       <ion-col width-50 class="center">
-        <button ion-button color="secondary" (click)="pressedTransaction(3)">Recurring<br/>Deposit</button>
+        <button ion-button color="secondary" (click)="pressedTransaction(true, transactionType.Deposit)">Recurring<br/>Deposit</button>
       </ion-col>
     </ion-row>
 
