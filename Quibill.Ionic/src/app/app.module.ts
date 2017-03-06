@@ -7,6 +7,7 @@ import { SingleTransactionPage } from '../pages/single-transaction/single-transa
 import { RecurringTransactionPage } from '../pages/recurring-transaction/recurring-transaction';
 import { AllTransactionsPage } from '../pages/all-transactions/all-transactions';
 import { TransactionService } from '../services/transaction-service';
+import { LoginPage } from '../pages/login/login';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { TransactionService } from '../services/transaction-service';
     HomePage,
     SingleTransactionPage,
     RecurringTransactionPage,
-    AllTransactionsPage
+    AllTransactionsPage,
+    LoginPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -25,7 +27,8 @@ import { TransactionService } from '../services/transaction-service';
     HomePage,
     SingleTransactionPage,
     RecurringTransactionPage,
-    AllTransactionsPage
+    AllTransactionsPage,
+    LoginPage
   ],
   providers: [
     TransactionService,
