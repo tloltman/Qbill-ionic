@@ -16,6 +16,8 @@ export class LoginPage {
   public username: string;
   public password: string;
 
+  public errors: any = [];
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController) {
     this.menuCtrl.enable(false);
   }
