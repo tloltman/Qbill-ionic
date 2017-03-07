@@ -12,6 +12,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = LoginPage;
+ 
 
   pages: Array<{title: string, component: any}>;
 
