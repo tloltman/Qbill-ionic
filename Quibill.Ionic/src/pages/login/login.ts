@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { HomePage } from '../home/home';
 import { NavController, NavParams, MenuController } from 'ionic-angular';
 import $ from 'jquery';
 
+var tokenKey = 'accessToken';
 
 /*
   Generated class for the Login page.
@@ -28,22 +30,33 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
+  loginSuccess() {
+      this.menuCtrl.enable(true);
+      //this.navCtrl.popToRoot();
+      this.navCtrl.push(HomePage);
+  }
+
   login() {
+      var _this = this;
     //Make Ajax request
       console.log('login button clicked');
       //HACK hardcoding login info for testing ajax.
       var loginData = {
           grant_type: 'password',
-          username: $('Admin1').val(),
-          password: $('password123').val()
+          username: 'Admin1',
+          password: 'password123'
       }
-
+      
       $.ajax({
           type: 'POST',
           url: 'http://localhost:61180/Token',
           contentType: 'application/x-www-form-urlencoded; charset=utf-8',
           data: loginData
+      }).done(function (data) {
+          _this.loginSuccess();
+          sessionStorage.setItem(tokenKey, data.access_token);
       });
+
   }
 
 }
