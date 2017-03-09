@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
-import { HomePage } from '../home/home';
 import { NavController, NavParams, MenuController } from 'ionic-angular';
-import $ from 'jquery';
-
-var tokenKey = 'accessToken';
+import { AuthService } from '../../services/authentication-service';
 
 /*
   Generated class for the Login page.
@@ -17,12 +14,14 @@ var tokenKey = 'accessToken';
 })
 export class LoginPage {
 
+  public authToken: string;
   public username: string;
   public password: string;
 
   public errors: any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController) {
+  constructor(public authService: AuthService, public navCtrl: NavController,
+      public navParams: NavParams, public menuCtrl: MenuController) {
     this.menuCtrl.enable(false);
   }
 
@@ -30,33 +29,34 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  loginSuccess() {
-      this.menuCtrl.enable(true);
-      //this.navCtrl.popToRoot();
-      this.navCtrl.push(HomePage);
+  //loginSuccess() {
+  //    this.menuCtrl.enable(true);
+  //    this.navCtrl.push(HomePage);
+  //}
+
+  login(username: string , password: string) {
+      this.authService.getToken(this.username, this.password).subscribe(
+          data => {
+              this.authToken = data.access_token; 
+              alert('You are logged in');
+          },
+          error => {
+              console.log(error);
+          });
   }
 
-  login() {
-      var _this = this;
-    //Make Ajax request
-      console.log('login button clicked');
-      //HACK hardcoding login info for testing ajax ...
-      var loginData = {
-          grant_type: 'password',
-          username: 'Admin1',
-          password: 'password123'
-      }
-      
-      $.ajax({
-          type: 'POST',
-          url: 'http://localhost:61180/Token',
-          contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-          data: loginData
-      }).done(function (data) {
-          _this.loginSuccess();
-          sessionStorage.setItem(tokenKey, data.access_token);
-      });
-
-  }
-
+  logout() {
+      this.authService.logout().subscribe(
+          data => {
+              //clear the authToken property, then log/alert successful logout
+              this.authToken = '';  
+              alert('Logout successful');
+          },
+          error => {
+              console.log(error);
+          });
 }
+
+  }
+
+
