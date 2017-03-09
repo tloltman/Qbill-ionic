@@ -40,7 +40,7 @@ export class LoginPage {
       var _this = this;
     //Make Ajax request
       console.log('login button clicked');
-      //HACK hardcoding login info for testing ajax ..
+      //HACK hardcoding login info for testing ajax ...
       var loginData = {
           grant_type: 'password',
           username: 'Admin1',
