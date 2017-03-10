@@ -14,7 +14,7 @@ import { AuthService } from '../../services/authentication-service';
 })
 export class LoginPage {
 
-  public authToken: string;
+  
   public username: string;
   public password: string;
 
@@ -37,7 +37,7 @@ export class LoginPage {
   login(username: string , password: string) {
       this.authService.getToken(this.username, this.password).subscribe(
           data => {
-              this.authToken = data.access_token; 
+              this.authService.myAuthToken = data.access_token; 
               alert('You are logged in');
           },
           error => {
@@ -48,8 +48,7 @@ export class LoginPage {
   logout() {
       this.authService.logout().subscribe(
           data => {
-              //clear the authToken property, then log/alert successful logout
-              this.authToken = '';  
+              //clear the authToken property, then log/alert successful logout  
               alert('Logout successful');
           },
           error => {
