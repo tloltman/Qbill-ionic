@@ -28,12 +28,7 @@ export class LoginPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
-
-  //loginSuccess() {
-  //    this.menuCtrl.enable(true);
-  //    this.navCtrl.push(HomePage);
-  //}
-
+ 
   login(username: string , password: string) {
       this.authService.getToken(this.username, this.password).subscribe(
           data => {
@@ -42,6 +37,7 @@ export class LoginPage {
           },
           error => {
               console.log(error);
+              this.errors.push(error)
           });
   }
 

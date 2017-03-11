@@ -31,10 +31,9 @@
         <button ion-button color="danger" (click)="logout()">Logout</button>
         
 
-
         <ion-item>
-            <ion-list no-lines class="input-errors">
-                <ion-item>Error logging in</ion-item>
+            <ion-list *ngFor="let error of errors" no-lines class="input-errors">
+                <ion-item>{{errors}}</ion-item>
             </ion-list>
         </ion-item>
 
