@@ -7,6 +7,7 @@ import { SingleTransactionPage } from '../pages/single-transaction/single-transa
 import { RecurringTransactionPage } from '../pages/recurring-transaction/recurring-transaction';
 import { AllTransactionsPage } from '../pages/all-transactions/all-transactions';
 import { TransactionService } from '../services/transaction-service';
+import { AuthService } from '../services/authentication-service';
 import { LoginPage } from '../pages/login/login';
 
 @NgModule({
@@ -32,7 +33,8 @@ import { LoginPage } from '../pages/login/login';
   ],
   providers: [
     TransactionService,
-    Storage
+    Storage,
+    AuthService
   ]
 })
 export class AppModule {}

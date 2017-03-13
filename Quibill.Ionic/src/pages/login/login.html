@@ -26,9 +26,14 @@
             <ion-input type="password" [(ngModel)]="password"></ion-input>
         </ion-item>
 
+
+        <button ion-button color="primary" (click)="login()">Login</button>
+        <button ion-button color="danger" (click)="logout()">Logout</button>
+        
+
         <ion-item>
-            <ion-list no-lines class="input-errors">
-                <ion-item>Error logging in</ion-item>
+            <ion-list *ngFor="let error of errors" no-lines class="input-errors">
+                <ion-item>{{error}}</ion-item>
             </ion-list>
         </ion-item>
 
