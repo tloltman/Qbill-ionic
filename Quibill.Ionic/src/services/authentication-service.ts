@@ -3,6 +3,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
@@ -13,7 +14,7 @@ export class AuthService {
     constructor(public storage: Storage, private http: Http) {
     }
 
-    getToken(username: string, password: string): Observable<any> {
+    getToken(username: string, password: string): Observable<ILoginResponse> {
         var loginData = 'grant_type=password&username=' + username + '&password=' + password;
         let headers = new Headers({
             'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'});
@@ -21,6 +22,7 @@ export class AuthService {
 
         return this.http.post('http://localhost:61180/Token', loginData, options)
             .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
+            //.do(data => console.log("getToken Response: " +JSON.stringify(data))) //Used this to get response data for interface
             .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
     }
 
@@ -41,7 +43,14 @@ export class AuthService {
     set myAuthToken(tokenFromResponse: string) {
         this._myAuthToken = tokenFromResponse;
     }
-    
 
+}
 
+export interface ILoginResponse {
+    "access_token": string;
+    "token_type": string;
+    "expires_in": number;
+    "userName": string;
+    ".issued": string;
+    ".expires": string; //TODO Maybe figure out a way to parse these to Dates without having to write methods outside of the interface? String is fine for now.
 }
