@@ -26,9 +26,19 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+      console.log('ionViewDidLoad LoginPage');
   }
- 
+
+  registerTest() {
+      this.authService.registerUser('TestBaruch4229241163@gmail.com', 'Password234.', 'Password234.').subscribe(
+          data => {
+              console.log('Registration');
+          },
+          error => {
+              console.log(error);
+          });
+  }
+
   login(username: string , password: string) {
       this.authService.getToken(this.username, this.password).subscribe(
           data => {
