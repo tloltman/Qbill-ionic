@@ -3,12 +3,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, MenuController } from 'ionic-angular';
 import { AuthService } from '../../services/authentication-service';
 
-/*
-  Generated class for the Login page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
     selector: 'page-user-register',
     templateUrl: 'user-register.html'
