@@ -16,16 +16,15 @@ export class AuthService {
     }
 
     registerUser(userEmail: string, userPassword: string, userConfirmPassword: string): Observable<any> {
-        var registrationData = 'grant_type=password&email=' + userEmail + '&password=' + userPassword + '&ConfirmPassword=' + userConfirmPassword;
+        var registrationData = '&email=' + userEmail + '&password=' + userPassword + '&ConfirmPassword=' + userConfirmPassword;
         let headers = new Headers({
             'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
         });
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(this._myServerRoot + '/api/Account/Register', registrationData, options)
-            .map((res: Response) => res.json())
-            .do(data => console.log("Registration Response: " + JSON.stringify(data)))
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+            //.do(data => console.log("Registration Response: " + JSON.stringify(data)))
+            .catch((error: any) => Observable.throw(error.text() || 'Server error')); //TODO clean up the registration errors and display to the user.
     }
 
     getToken(username: string, password: string): Observable<ILoginResponse> {
@@ -69,8 +68,4 @@ export interface ILoginResponse {
     "userName": string;
     ".issued": string;
     ".expires": string; //TODO Maybe figure out a way to parse these to Dates without having to write methods outside of the interface? String is fine for now.
-}
-
-export interface IRegistrationResponse {
-    //TODO impliment
 }
