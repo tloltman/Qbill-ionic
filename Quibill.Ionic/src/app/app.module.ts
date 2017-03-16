@@ -9,6 +9,7 @@ import { AllTransactionsPage } from '../pages/all-transactions/all-transactions'
 import { TransactionService } from '../services/transaction-service';
 import { AuthService } from '../services/authentication-service';
 import { LoginPage } from '../pages/login/login';
+import { UserRegisterPage } from '../pages/user-register/user-register';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { LoginPage } from '../pages/login/login';
     SingleTransactionPage,
     RecurringTransactionPage,
     AllTransactionsPage,
-    LoginPage
+    LoginPage,
+    UserRegisterPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -29,7 +31,8 @@ import { LoginPage } from '../pages/login/login';
     SingleTransactionPage,
     RecurringTransactionPage,
     AllTransactionsPage,
-    LoginPage
+    LoginPage,
+    UserRegisterPage
   ],
   providers: [
     TransactionService,

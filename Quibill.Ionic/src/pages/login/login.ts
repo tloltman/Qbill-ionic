@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, MenuController } from 'ionic-angular';
 import { AuthService } from '../../services/authentication-service';
 
+import { UserRegisterPage } from '../user-register/user-register';
+
 /*
   Generated class for the Login page.
 
@@ -26,9 +28,10 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+      console.log('ionViewDidLoad LoginPage');
   }
- 
+
+
   login(username: string , password: string) {
       this.authService.getToken(this.username, this.password).subscribe(
           data => {
@@ -49,8 +52,12 @@ export class LoginPage {
           },
           error => {
               console.log(error);
-          });
-}
+          });     
+  }
+
+  navigateToRegisterPage() {
+      this.navCtrl.push(UserRegisterPage);
+  }
 
   }
 

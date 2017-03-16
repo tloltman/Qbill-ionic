@@ -1,0 +1,38 @@
+﻿<ion-header>
+
+    <ion-navbar>
+        <ion-title>Register</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+
+        <ion-item>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="text" [(ngModel)]="userEmail"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Password</ion-label>
+            <ion-input type="password" [(ngModel)]="userPassword"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Confirm Password</ion-label>
+            <ion-input type="password" [(ngModel)]="userConfirmPassword"></ion-input>
+        </ion-item>
+
+
+        <button ion-button color="primary" (click)="registerUser()">Submit</button>
+
+        <ion-item>
+            <ion-list *ngFor="let error of errors" no-lines class="input-errors">
+                <ion-item>{{error}}</ion-item>
+            </ion-list>
+        </ion-item>
+
+    </ion-list>
+</ion-content>
