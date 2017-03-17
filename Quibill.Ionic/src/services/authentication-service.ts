@@ -40,14 +40,7 @@ export class AuthService {
     }
 
     logout() {
-        let headers = new Headers({ 'Authorization': 'Bearer ' + this.myAuthToken })
-        let options = new RequestOptions({ headers: headers });
         this.myAuthToken = '';
-
-        return this.http.post(this._myServerRoot + '/api/account/logout', '', options)
-            .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
-        
     }
 
     get myAuthToken(): string {
