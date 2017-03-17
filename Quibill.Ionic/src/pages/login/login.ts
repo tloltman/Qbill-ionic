@@ -45,14 +45,14 @@ export class LoginPage {
   }
 
   logout() {
-      this.authService.logout().subscribe(
-          data => {
-              //clear the authToken property, then log/alert successful logout  
-              alert('Logout successful');
-          },
-          error => {
-              console.log(error);
-          });     
+      this.authService.logout()
+      if (this.authService.myAuthToken == '') {
+          alert('You Are Logged Out');
+      }
+      else {
+          this.errors.push('Logout unsuccessful');
+      }
+          
   }
 
   navigateToRegisterPage() {
