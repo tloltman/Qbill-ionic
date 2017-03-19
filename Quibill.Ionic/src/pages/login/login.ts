@@ -39,7 +39,7 @@ export class LoginPage {
               alert('You are logged in');
           },
           error => {
-              console.log(error);
+              console.log(error); 
               this.errors.push(error)
           });
   }
