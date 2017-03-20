@@ -24,7 +24,7 @@ export class AuthService {
 
         return this.http.post(this._myServerRoot + '/api/Account/Register', registrationData, options)
             //.do(data => console.log("Registration Response: " + JSON.stringify(data)))
-            .catch((error: any) => Observable.throw(error.text() || 'Server error')); //TODO clean up the registration errors and display to the user.
+            .catch((error: any) => Observable.throw(error.json().ModelState || 'Server error'));
     }
 
     getToken(username: string, password: string): Observable<ILoginResponse> {
@@ -35,8 +35,8 @@ export class AuthService {
 
         return this.http.post(this._myServerRoot + '/Token', loginData, options)
             .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
-            //.do(data => console.log("getToken Response: " +JSON.stringify(data))) //Used this to get response data for interface
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+            //.do(error => console.log("getToken Error Response: " +JSON.stringify(error))) //Used this to get response data for interface
+            .catch((error: any) => Observable.throw(error.json().error_description || 'Server error')); //...errors if any
     }
 
     logout() {

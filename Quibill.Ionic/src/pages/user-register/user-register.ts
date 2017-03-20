@@ -30,10 +30,23 @@ export class UserRegisterPage {
                 this.navCtrl.popToRoot()
             },
             error => {
-                console.log(error);
-                this.errors.push(error);
+                this.errors = [''];
+                if (error != 'Server error') {
+                    for (var errorProp in error) {
+                        if (error.hasOwnProperty(errorProp)) {
+                            var errorArray = error[errorProp];
+                            if (errorArray.length) {
+                                for (var i = 0; i < errorArray.length; ++i) {
+                                    this.errors.push(errorArray[i]);
+                                    console.log(errorArray[i]);
+                                }
+                            }
+                        }
+                    }
+                }
+                if (error == 'Server error')
+                    this.errors.push(error);
             });
-
     }
 
 }
