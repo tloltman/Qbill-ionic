@@ -2,6 +2,8 @@
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Storage } from '@ionic/storage';
+import { AppSettings } from '../app-settings';
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
@@ -10,7 +12,7 @@ import 'rxjs/add/operator/catch';
 export class AuthService {
 
     private _myAuthToken: string;
-    private _myServerRoot: string = 'http://localhost:61180';
+    private _myServerRoot: string = AppSettings.serverUrl;
 
     constructor(public storage: Storage, private http: Http) {
     }
