@@ -45,6 +45,14 @@ export class AuthService {
         this.myAuthToken = '';
     }
 
+    isUserLoggedIn(): boolean {
+        if (this.myAuthToken == '')
+            return false;
+        else {
+            return true;
+        }
+    }
+
     get myAuthToken(): string {
         return this._myAuthToken;
     }
@@ -53,13 +61,7 @@ export class AuthService {
     }
 
 
-    isUserLoggedIn(): boolean {
-        if (this._myAuthToken == '')
-            return false;
-        else {
-            return true;
-        }
-    }
+
 
 }
 
