@@ -1,6 +1,8 @@
 ﻿
 import { Component } from '@angular/core';
 import { NavController, NavParams, MenuController } from 'ionic-angular';
+
+import { HomePage } from '../home/home'
 import { AuthService } from '../../services/authentication-service';
 
 
@@ -27,7 +29,15 @@ export class UserRegisterPage {
     registerUser() {
         this.authService.registerUser(this.userEmail, this.userPassword, this.userConfirmPassword).subscribe(
             data => {
-                this.navCtrl.popToRoot()
+                this.authService.getToken(this.userEmail, this.userPassword).subscribe(
+                    data => {
+                        this.authService.myAuthToken = data.access_token;
+                        this.navCtrl.setRoot(HomePage);
+                    },
+                    error => {
+                        console.log(error);
+                        this.errors.push(error)
+                    });
             },
             error => {
                 this.errors = [''];

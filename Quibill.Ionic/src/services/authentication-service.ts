@@ -11,7 +11,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class AuthService {
 
-    private _myAuthToken: string;
+    private _myAuthToken: string = '';
     private _myServerRoot: string = AppSettings.serverUrl;
 
     constructor(public storage: Storage, private http: Http) {
@@ -45,6 +45,14 @@ export class AuthService {
         this.myAuthToken = '';
     }
 
+    isUserLoggedIn(): boolean {
+        if (this.myAuthToken == '')
+            return false;
+        else {
+            return true;
+        }
+    }
+
     get myAuthToken(): string {
         return this._myAuthToken;
     }
@@ -54,7 +62,10 @@ export class AuthService {
 
 
 
+
 }
+
+
 
 export interface ILoginResponse {
     "access_token": string;

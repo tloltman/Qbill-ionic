@@ -3,7 +3,8 @@ import { NavController, NavParams, MenuController } from 'ionic-angular';
 import { AuthService } from '../../services/authentication-service';
 
 import { UserRegisterPage } from '../user-register/user-register';
-
+import { HomePage } from '../home/home';
+ 
 /*
   Generated class for the Login page.
 
@@ -24,7 +25,10 @@ export class LoginPage {
 
   constructor(public authService: AuthService, public navCtrl: NavController,
       public navParams: NavParams, public menuCtrl: MenuController) {
-    this.menuCtrl.enable(false);
+  }
+
+  ionViewDidEnter() {
+      this.menuCtrl.enable(false);
   }
 
   ionViewDidLoad() {
@@ -35,24 +39,13 @@ export class LoginPage {
   login(username: string , password: string) {
       this.authService.getToken(this.username, this.password).subscribe(
           data => {
-              this.authService.myAuthToken = data.access_token; 
-              alert('You are logged in');
+              this.authService.myAuthToken = data.access_token;
+              this.navCtrl.setRoot(HomePage);
           },
           error => {
               console.log(error); 
               this.errors.push(error)
           });
-  }
-
-  logout() {
-      this.authService.logout()
-      if (this.authService.myAuthToken == '') {
-          alert('You Are Logged Out');
-      }
-      else {
-          this.errors.push('Logout unsuccessful');
-      }
-          
   }
 
   navigateToRegisterPage() {
