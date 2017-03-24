@@ -25,7 +25,10 @@ export class LoginPage {
 
   constructor(public authService: AuthService, public navCtrl: NavController,
       public navParams: NavParams, public menuCtrl: MenuController) {
-    this.menuCtrl.enable(false);
+  }
+
+  ionViewDidEnter() {
+      this.menuCtrl.enable(false);
   }
 
   ionViewDidLoad() {
@@ -43,17 +46,6 @@ export class LoginPage {
               console.log(error); 
               this.errors.push(error)
           });
-  }
-
-  logout() {
-      this.authService.logout()
-      if (this.authService.myAuthToken == '') {
-          this.navCtrl.setRoot(LoginPage);
-      }
-      else {
-          this.errors.push('Logout unsuccessful');
-      }
-          
   }
 
   navigateToRegisterPage() {

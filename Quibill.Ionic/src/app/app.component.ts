@@ -46,4 +46,14 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
+  logout() {
+          this.authService.logout()
+          if (this.authService.myAuthToken == '') {
+              this.nav.setRoot(LoginPage);
+          }
+          else {
+              alert('Logout unsuccessful');
+          }
+  }
+
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { MenuController } from 'ionic-angular';
 import { SingleTransactionPage } from '../single-transaction/single-transaction';
 import { RecurringTransactionPage } from '../recurring-transaction/recurring-transaction';
 import { AllTransactionsPage } from '../all-transactions/all-transactions';
@@ -12,11 +13,13 @@ export class HomePage {
     remainingBudgetDollars: number;
     nextPayDate: string;
   
-    constructor(public navCtrl: NavController) {
-      this.remainingBudgetDollars = 0.00;
+    constructor(public navCtrl: NavController, public menuCtrl: MenuController) {
+        this.remainingBudgetDollars = 0.00;
     }
 
-
+    ionViewDidEnter() {
+        this.menuCtrl.enable(true);
+    }
 
     transactionType = Object.freeze({
       Withdrawal: 'Withdrawal',
