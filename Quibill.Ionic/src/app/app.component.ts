@@ -19,6 +19,7 @@ export class MyApp {
 
   constructor(public platform: Platform, private authService: AuthService) {
       this.initializeApp();
+
       if (authService.isUserLoggedIn() == true) this.rootPage = HomePage;
       else this.rootPage = LoginPage;
 
