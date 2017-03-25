@@ -15,8 +15,21 @@
 
 <ion-content padding>
     <ion-list>
+        <form [formGroup="loginForm" ]>
 
-        <ion-item>
+            <ion-itemL>
+                <ion-label floating>Email</ion-label>
+                <ion-input formControlName="email" type="text"></ion-input>
+            </ion-itemL>
+
+            <ion-itemL>
+                <ion-label floating>Password</ion-label>
+                <ion-input formControlName="password" type="text"></ion-input>
+            </ion-itemL>
+
+        </form>
+
+        <!--<ion-item>
             <ion-label floating>Username</ion-label>
             <ion-input type="text" [(ngModel)]="username"></ion-input>
         </ion-item>
@@ -24,7 +37,7 @@
         <ion-item>
             <ion-label floating>Password</ion-label>
             <ion-input type="password" [(ngModel)]="password"></ion-input>
-        </ion-item>
+        </ion-item>-->
 
 
         <button ion-button color="primary" (click)="login()">Login</button>

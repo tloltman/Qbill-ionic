@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 import { AuthService } from '../../services/authentication-service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { UserRegisterPage } from '../user-register/user-register';
 import { HomePage } from '../home/home';
@@ -18,13 +19,22 @@ import { HomePage } from '../home/home';
 export class LoginPage {
 
   
-  public username: string;
+  public email: string;
   public password: string;
 
   public errors: any = [];
 
+  loginForm: FormGroup;
+
+  submitAttempt: boolean = false; //used to track whether a subit has been made for validation error styling purposes
+
   constructor(public authService: AuthService, public navCtrl: NavController,
-      public navParams: NavParams, public menuCtrl: MenuController) {
+      public menuCtrl: MenuController, public formBuilder: FormBuilder) {
+
+      this.loginForm = formBuilder.group({
+          email: ['', Validators.compose([Validators.required, Validators.pattern('\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b')])], //This Validator pattern should cover 99% of valid email addresses.
+          password: ['', Validators.compose([Validators.required])]
+      });
   }
 
   ionViewDidEnter() {
@@ -35,9 +45,13 @@ export class LoginPage {
       console.log('ionViewDidLoad LoginPage');
   }
 
+  loginValidation() {
+
+  }
+
 
   login(username: string , password: string) {
-      this.authService.getToken(this.username, this.password).subscribe(
+      this.authService.getToken(this.email, this.password).subscribe(
           data => {
               this.authService.myAuthToken = data.access_token;
               this.navCtrl.setRoot(HomePage);
@@ -52,6 +66,8 @@ export class LoginPage {
       this.navCtrl.push(UserRegisterPage);
   }
 
-  }
+
+
+}
 
 
