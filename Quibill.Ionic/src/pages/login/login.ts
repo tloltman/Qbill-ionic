@@ -32,8 +32,8 @@ export class LoginPage {
       public menuCtrl: MenuController, public formBuilder: FormBuilder) {
 
       this.loginForm = formBuilder.group({
-          email: ['', Validators.compose([Validators.required, Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)])], //This Validator pattern should cover 99% of valid email addresses.
-          password: ['', Validators.compose([Validators.required])]
+          email: [this.email, Validators.compose([Validators.required, Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)])], //This Validator pattern regex should cover 99% of valid email addresses.
+          password: [this.password, Validators.compose([Validators.required])]
       });
   }
 
@@ -51,7 +51,7 @@ export class LoginPage {
 
 
   login(username: string, password: string) {
-      this.submitAttempt = true; //Indicate that we attempted to submit the form
+      this.submitAttempt = true; //Indicate that we attempted to submit the form to apply error styles.
 
       if (this.loginForm.valid) { //If forms are valid, request the token from server
           this.authService.getToken(this.email, this.password).subscribe(

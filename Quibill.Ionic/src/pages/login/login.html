@@ -20,8 +20,8 @@
         <form [formGroup]="loginForm">
 
             <ion-item>
-                <ion-label class="loginLabel" floating>Email</ion-label>
-                <ion-input formControlName="email" type="text" [class.invalid]="!loginForm.controls.email.valid &&
+                <ion-label class="validationLabel" floating>Email</ion-label>
+                <ion-input formControlName="email" type="text" [(ngModel)]="email" [class.invalid]="!loginForm.controls.email.valid &&
                            (loginForm.controls.email.dirty || submitAttempt)"></ion-input>
             </ion-item>
 
@@ -30,8 +30,8 @@
             </ion-item>
 
             <ion-item>
-                <ion-label class="loginLabel" floating>Password</ion-label>
-                <ion-input formControlName="password" type="text" [class.invalid]="!loginForm.controls.password.valid &&
+                <ion-label class="validationLabel" floating>Password</ion-label>
+                <ion-input formControlName="password" type="password" [(ngModel)]="password" [class.invalid]="!loginForm.controls.password.valid &&
                            (loginForm.controls.password.dirty || submitAttempt)"></ion-input>
             </ion-item>
 
@@ -42,19 +42,7 @@
             <button ion-button color="primary" (click)="login()">Login</button>
             <button ion-button color="secondary" (click)="navigateToRegisterPage()">Sign Up!</button> 
 
-        </form>
-
-        <!--<ion-item>
-            <ion-label floating>Username</ion-label>
-            <ion-input type="text" [(ngModel)]="username"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label floating>Password</ion-label>
-            <ion-input type="password" [(ngModel)]="password"></ion-input>
-        </ion-item>-->
-
-        
+        </form>  
 
         <ion-item>
             <ion-list *ngFor="let error of errors" no-lines class="input-errors">
