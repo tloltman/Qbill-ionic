@@ -14,18 +14,33 @@
 
 
 <ion-content padding>
-    <ion-list>
-        <form [formGroup="loginForm" ]>
 
-            <ion-itemL>
-                <ion-label floating>Email</ion-label>
-                <ion-input formControlName="email" type="text"></ion-input>
-            </ion-itemL>
+    <ion-list no-lines>
 
-            <ion-itemL>
-                <ion-label floating>Password</ion-label>
-                <ion-input formControlName="password" type="text"></ion-input>
-            </ion-itemL>
+        <form [formGroup]="loginForm">
+
+            <ion-item>
+                <ion-label class="loginLabel" floating>Email</ion-label>
+                <ion-input formControlName="email" type="text" [class.invalid]="!loginForm.controls.email.valid &&
+                           (loginForm.controls.email.dirty || submitAttempt)"></ion-input>
+            </ion-item>
+
+            <ion-item *ngIf="!loginForm.controls.email.valid && (loginForm.controls.email.dirty || submitAttempt)">
+                <p class="warning">Please enter a valid email address.</p>
+            </ion-item>
+
+            <ion-item>
+                <ion-label class="loginLabel" floating>Password</ion-label>
+                <ion-input formControlName="password" type="text" [class.invalid]="!loginForm.controls.password.valid &&
+                           (loginForm.controls.password.dirty || submitAttempt)"></ion-input>
+            </ion-item>
+
+            <ion-item *ngIf="!loginForm.controls.password.valid && (loginForm.controls.email.dirty || submitAttempt)">
+                <p class="warning">Please enter your password</p>
+            </ion-item>
+
+            <button ion-button color="primary" (click)="login()">Login</button>
+            <button ion-button color="secondary" (click)="navigateToRegisterPage()">Sign Up!</button> 
 
         </form>
 
@@ -39,9 +54,6 @@
             <ion-input type="password" [(ngModel)]="password"></ion-input>
         </ion-item>-->
 
-
-        <button ion-button color="primary" (click)="login()">Login</button>
-        <button ion-button color ="secondary" (click)="navigateToRegisterPage()">Sign Up!</button> 
         
 
         <ion-item>

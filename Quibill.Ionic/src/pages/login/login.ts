@@ -26,13 +26,13 @@ export class LoginPage {
 
   loginForm: FormGroup;
 
-  submitAttempt: boolean = false; //used to track whether a subit has been made for validation error styling purposes
+  submitAttempt: boolean = false; //used to track whether a subit has been made for validation error styling
 
   constructor(public authService: AuthService, public navCtrl: NavController,
       public menuCtrl: MenuController, public formBuilder: FormBuilder) {
 
       this.loginForm = formBuilder.group({
-          email: ['', Validators.compose([Validators.required, Validators.pattern('\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b')])], //This Validator pattern should cover 99% of valid email addresses.
+          email: ['', Validators.compose([Validators.required, Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)])], //This Validator pattern should cover 99% of valid email addresses.
           password: ['', Validators.compose([Validators.required])]
       });
   }
@@ -50,16 +50,21 @@ export class LoginPage {
   }
 
 
-  login(username: string , password: string) {
-      this.authService.getToken(this.email, this.password).subscribe(
-          data => {
-              this.authService.myAuthToken = data.access_token;
-              this.navCtrl.setRoot(HomePage);
-          },
-          error => {
-              console.log(error); 
-              this.errors.push(error)
-          });
+  login(username: string, password: string) {
+      this.submitAttempt = true; //Indicate that we attempted to submit the form
+
+      if (this.loginForm.valid) { //If forms are valid, request the token from server
+          this.authService.getToken(this.email, this.password).subscribe(
+              data => {
+                  this.authService.myAuthToken = data.access_token;
+                  this.navCtrl.setRoot(HomePage);
+              },
+              error => {
+                  console.log(error);
+                  this.errors = [''];
+                  this.errors.push(error)
+              });
+      }
   }
 
   navigateToRegisterPage() {
