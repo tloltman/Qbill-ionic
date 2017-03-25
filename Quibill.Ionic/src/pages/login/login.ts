@@ -18,8 +18,8 @@ import { HomePage } from '../home/home';
 export class LoginPage {
 
   
-  public username: string;
-  public password: string;
+  private username: string;
+  private password: string;
 
   public errors: any = [];
 

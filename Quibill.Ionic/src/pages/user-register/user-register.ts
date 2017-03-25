@@ -1,6 +1,7 @@
 ﻿
 import { Component } from '@angular/core';
 import { NavController, NavParams, MenuController } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { HomePage } from '../home/home'
 import { AuthService } from '../../services/authentication-service';
@@ -12,14 +13,25 @@ import { AuthService } from '../../services/authentication-service';
 })
 export class UserRegisterPage {
 
-    public errors: any = [];
     private userEmail: string;
     private userPassword: string;
     private userConfirmPassword: string;
 
+    public errors: any = [];
+
+    registerForm: FormGroup;
+
     constructor(public authService: AuthService, public navCtrl: NavController,
-        public navParams: NavParams, public menuCtrl: MenuController) {
+        public navParams: NavParams, public menuCtrl: MenuController, public formBuilder: FormBuilder) {
         this.menuCtrl.enable(false);
+
+        this.registerForm = formBuilder.group({
+            email: ['', Validators.compose([Validators.required, Validators.pattern()])],
+            password: [],
+            confirmPassword:
+        });
+
+        
     }
 
     ionViewDidLoad() {
