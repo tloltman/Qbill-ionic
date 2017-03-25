@@ -32,8 +32,8 @@ export class LoginPage {
       public menuCtrl: MenuController, public formBuilder: FormBuilder) {
 
       this.loginForm = formBuilder.group({
-          email: [this.email, Validators.compose([Validators.required, Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)])], //This Validator pattern regex should cover 99% of valid email addresses.
-          password: [this.password, Validators.compose([Validators.required])]
+          email: ['', Validators.compose([Validators.required, Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)])], //This Validator pattern regex should cover 99% of valid email addresses.
+          password: ['', Validators.required]
       });
   }
 
@@ -43,10 +43,6 @@ export class LoginPage {
 
   ionViewDidLoad() {
       console.log('ionViewDidLoad LoginPage');
-  }
-
-  loginValidation() {
-
   }
 
 
