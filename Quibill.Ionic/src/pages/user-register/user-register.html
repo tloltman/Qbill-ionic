@@ -41,10 +41,6 @@
             </ion-item>
 
             <ion-item *ngIf="!registerForm.controls.confirmPassword.valid && (registerForm.controls.confirmPassword.dirty || submitAttempt)">
-                <p class="warning">Please confirm password</p>
-            </ion-item>
-
-            <ion-item *ngIf="{{confirmPassword}} != {{password}} && (registerForm.controls.confirmPassword.dirty || submitAttempt)">
                 <p class="warning">Passwords do not match.</p>
             </ion-item>
 
