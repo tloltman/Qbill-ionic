@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 import { AuthService } from '../../services/authentication-service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { UserRegisterPage } from '../user-register/user-register';
 import { HomePage } from '../home/home';
@@ -18,13 +19,22 @@ import { HomePage } from '../home/home';
 export class LoginPage {
 
   
-  public username: string;
+  public email: string;
   public password: string;
 
   public errors: any = [];
 
+  loginForm: FormGroup;
+
+  submitAttempt: boolean = false; //used to track whether a subit has been made for validation error styling
+
   constructor(public authService: AuthService, public navCtrl: NavController,
-      public navParams: NavParams, public menuCtrl: MenuController) {
+      public menuCtrl: MenuController, public formBuilder: FormBuilder) {
+
+      this.loginForm = formBuilder.group({
+          email: ['', Validators.compose([Validators.required, Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)])], //This Validator pattern regex should cover 99% of valid email addresses.
+          password: ['', Validators.required]
+      });
   }
 
   ionViewDidEnter() {
@@ -36,22 +46,29 @@ export class LoginPage {
   }
 
 
-  login(username: string , password: string) {
-      this.authService.getToken(this.username, this.password).subscribe(
-          data => {
-              this.authService.myAuthToken = data.access_token;
-              this.navCtrl.setRoot(HomePage);
-          },
-          error => {
-              console.log(error); 
-              this.errors.push(error)
-          });
+  login(username: string, password: string) {
+      this.submitAttempt = true; //Indicate that we attempted to submit the form to apply error styles.
+
+      if (this.loginForm.valid) { //If forms are valid, request the token from server
+          this.authService.getToken(this.email, this.password).subscribe(
+              data => {
+                  this.authService.myAuthToken = data.access_token;
+                  this.navCtrl.setRoot(HomePage);
+              },
+              error => {
+                  console.log(error);
+                  this.errors = [''];
+                  this.errors.push(error)
+              });
+      }
   }
 
   navigateToRegisterPage() {
       this.navCtrl.push(UserRegisterPage);
   }
 
-  }
+
+
+}
 
 
