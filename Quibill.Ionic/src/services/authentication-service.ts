@@ -29,8 +29,8 @@ export class AuthService {
             .catch((error: any) => Observable.throw(error.json().ModelState || 'Server error'));
     }
 
-    getToken(username: string, password: string): Observable<ILoginResponse> {
-        var loginData = 'grant_type=password&username=' + username + '&password=' + password;
+    getToken(email: string, password: string): Observable<ILoginResponse> {
+        var loginData = 'grant_type=password&username=' + email + '&password=' + password;
         let headers = new Headers({
             'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'});
         let options = new RequestOptions({ headers: headers });
