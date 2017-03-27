@@ -18,7 +18,6 @@ import { HomePage } from '../home/home';
 })
 export class LoginPage {
 
-  
   public email: string;
   public password: string;
 
