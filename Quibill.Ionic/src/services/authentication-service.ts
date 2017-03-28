@@ -59,7 +59,7 @@ export class AuthService {
 
     }
  
-    public getUserData(): UserData {
+    getUserData(): UserData {
         return this.userId;
     }
     setUserData(CurrentUser: ILoginResponse) {
