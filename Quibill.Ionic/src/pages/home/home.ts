@@ -5,6 +5,8 @@ import { SingleTransactionPage } from '../single-transaction/single-transaction'
 import { RecurringTransactionPage } from '../recurring-transaction/recurring-transaction';
 import { AllTransactionsPage } from '../all-transactions/all-transactions';
 
+import { AuthService } from '../../services/authentication-service';
+
 @Component({
   selector: 'page-homepage',
   templateUrl: 'home.html'
@@ -12,8 +14,9 @@ import { AllTransactionsPage } from '../all-transactions/all-transactions';
 export class HomePage {
     remainingBudgetDollars: number;
     nextPayDate: string;
+    currentUserName: string = this.authService.getUserData().getCurrentUserName;
   
-    constructor(public navCtrl: NavController, public menuCtrl: MenuController) {
+    constructor(public navCtrl: NavController, public menuCtrl: MenuController, public authService: AuthService) {
         this.remainingBudgetDollars = 0.00;
     }
 
