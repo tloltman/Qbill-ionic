@@ -47,8 +47,8 @@ export class MyApp {
   }
 
   logout() {
-          this.authService.logout()
-          if (this.authService.myAuthToken == '') {
+      this.authService.logout()
+      if (this.authService.isUserLoggedIn() == false) {
               this.nav.setRoot(LoginPage);
           }
           else {

@@ -25,7 +25,7 @@ export class LoginPage {
 
   loginForm: FormGroup;
 
-  submitAttempt: boolean = false; //used to track whether a subit has been made for validation error styling
+  submitAttempt: boolean = false; //used to track whether a submit has been made for validation error styling
 
   constructor(public authService: AuthService, public navCtrl: NavController,
       public menuCtrl: MenuController, public formBuilder: FormBuilder) {
@@ -51,7 +51,7 @@ export class LoginPage {
       if (this.loginForm.valid) { //If forms are valid, request the token from server
           this.authService.getToken(this.email, this.password).subscribe(
               data => {
-                  this.authService.myAuthToken = data.access_token;
+                  this.authService.setUserData(data);
                   this.navCtrl.setRoot(HomePage);
               },
               error => {

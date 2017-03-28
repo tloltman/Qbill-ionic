@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Rx';
 import { Storage } from '@ionic/storage';
 import { AppSettings } from '../app-settings';
 
+import { UserData } from '../shared/UserData';
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
@@ -11,10 +13,11 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class AuthService {
 
-    private _myAuthToken: string = '';
+    private userId: UserData = undefined;
     private _myServerRoot: string = AppSettings.serverUrl;
 
     constructor(public storage: Storage, private http: Http) {
+        
     }
 
     registerUser(userEmail: string, userPassword: string, userConfirmPassword: string): Observable<any> {
@@ -32,7 +35,8 @@ export class AuthService {
     getToken(email: string, password: string): Observable<ILoginResponse> {
         var loginData = 'grant_type=password&username=' + email + '&password=' + password;
         let headers = new Headers({
-            'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'});
+            'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+        });
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(this._myServerRoot + '/Token', loginData, options)
@@ -42,32 +46,30 @@ export class AuthService {
     }
 
     logout() {
-        this.myAuthToken = '';
+        this.userId = undefined;
     }
 
     isUserLoggedIn(): boolean {
-        if (this.myAuthToken == '')
-            return false;
-        else {
-            return true;
+        if (this.userId) {
+                        return true;
         }
+        else {
+            return false;
+        }
+
     }
-
-    get myAuthToken(): string {
-        return this._myAuthToken;
+ 
+    getUserData(): UserData {
+        return this.userId;
     }
-    set myAuthToken(tokenFromResponse: string) {
-        this._myAuthToken = tokenFromResponse;
+    setUserData(CurrentUser: ILoginResponse) {
+        this.userId = new UserData(CurrentUser.userName, CurrentUser.access_token);
     }
-
-
-
 
 }
 
-
-
 export interface ILoginResponse {
+
     "access_token": string;
     "token_type": string;
     "expires_in": number;

@@ -48,7 +48,7 @@ export class UserRegisterPage {
                 data => {
                     this.authService.getToken(this.userEmail, this.userPassword).subscribe(
                         data => {
-                            this.authService.myAuthToken = data.access_token;
+                            this.authService.setUserData(data);
                             this.navCtrl.setRoot(HomePage);
                         },
                         error => {
