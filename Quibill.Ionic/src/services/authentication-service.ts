@@ -13,7 +13,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class AuthService {
 
-    private userId: UserData = undefined;
+    private userId: UserData = null;
     private _myServerRoot: string = AppSettings.serverUrl;
 
     constructor(public storage: Storage, private http: Http) {
@@ -46,7 +46,7 @@ export class AuthService {
     }
 
     logout() {
-        this.userId = undefined;
+        this.userId = null;
     }
 
     isUserLoggedIn(): boolean {
