@@ -51,7 +51,7 @@ export class LoginPage {
       if (this.loginForm.valid) { //If forms are valid, request the token from server
           this.authService.getToken(this.email, this.password).subscribe(
               data => {
-                  this.authService.setUserData(data);
+                  this.authService.saveUserToStorage(data);
                   this.navCtrl.setRoot(HomePage);
               },
               error => {

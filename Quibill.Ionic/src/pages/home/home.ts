@@ -14,7 +14,7 @@ import { AuthService } from '../../services/authentication-service';
 export class HomePage {
     remainingBudgetDollars: number;
     nextPayDate: string;
-    currentUserName: string = this.authService.getUserData().getCurrentUserName;
+   // currentUserName: string = this.authService.getUserData().getCurrentUserName;
   
     constructor(public navCtrl: NavController, public menuCtrl: MenuController, public authService: AuthService) {
         this.remainingBudgetDollars = 0.00;

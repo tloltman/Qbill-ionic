@@ -48,23 +48,16 @@ export class AuthService {
 
     logout() {
         this.userId = null;
-    }
 
-    isUserLoggedIn(): boolean {
-        if (this.userId) {
-            return true;
-        }
-        else {
-            return false;
-        }
-
+        console.log('storage size before clear:');
+        this.storage.length().then((success) => { console.log(success) });
+        this.storage.clear().then((success) => {console.log('storage cleared');});
+        console.log('storage size after clear:');
+        this.storage.length().then((success) => { console.log(success) });
     }
 
     getUserData(): UserData {
         return this.userId;
-    }
-    setUserData(CurrentUser: ILoginResponse) {
-        this.userId = new UserData(CurrentUser.userName, CurrentUser.access_token);
     }
 
     loadUserFromStorage(): Promise<any> {
@@ -72,8 +65,8 @@ export class AuthService {
         return new Promise((resolveFunction, rejectFunction) =>
             this.storage.ready().then(
                 (storageReady) => {
+                    this.getUserIdFromStoragePromise()
                     resolveFunction('success');
-                    this.userIDPromise()
             },
                 (error) => {
                     console.log(error);
@@ -82,7 +75,40 @@ export class AuthService {
         ));
     }
 
-    userIDPromise(): Promise<any> { //Helper method for loadUserFrom Storage
+    saveUserToStorage(CurrentUser: ILoginResponse): Promise<any> {
+        return new Promise((resolveFunction, rejectFunction) =>
+            this.storage.ready().then(
+                (storageReady) => {
+                    this.getUserIdForStoragePromise(CurrentUser);
+                    resolveFunction('success');
+                },
+                (error) => {
+                    console.log(error);
+                    rejectFunction('There was a problem accessing storage');
+                }
+            ));
+
+    }
+
+    getUserIdForStoragePromise(CurrentUser: ILoginResponse): Promise<any> {
+        var newUser = new UserData(CurrentUser.userName, CurrentUser.access_token);
+
+        return new Promise((resolveFunction, rejectFunction) =>
+            this.storage.set(AppSettings.userAccessKey, newUser).then(
+                (gottenValue) => {
+                    this.userId = newUser;
+                },
+                (error) => {
+                    console.log(error);
+                    rejectFunction('There was an error getting the user Data')
+                }
+        ));
+
+
+    }
+
+
+    getUserIdFromStoragePromise(): Promise<any> { //Helper method for loadUserFrom Storage
         return new Promise((resolveFunction, rejectFunction) =>
 
             this.storage.get(this._userAccessKey).then(

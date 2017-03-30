@@ -20,8 +20,17 @@ export class MyApp {
   constructor(public platform: Platform, private authService: AuthService) {
       this.initializeApp();
 
-      if (authService.isUserLoggedIn() == true) this.rootPage = HomePage;
-      else this.rootPage = LoginPage;
+      this.rootPage = LoginPage;
+
+      authService.loadUserFromStorage().then(
+          (gottenValue) => {
+              console.log('This shouldn\'t load: ' + gottenValue);
+              this.nav.setRoot(HomePage);
+          },
+          (error) => {
+              console.log(error)
+          }
+      );
 
 
     // used for an example of ngFor and navigation
@@ -47,13 +56,8 @@ export class MyApp {
   }
 
   logout() {
-      this.authService.logout()
-      if (this.authService.isUserLoggedIn() == false) {
-              this.nav.setRoot(LoginPage);
-          }
-          else {
-              alert('Logout unsuccessful');
-          }
+      this.authService.logout();
+      this.nav.setRoot(LoginPage);
   }
 
 }
