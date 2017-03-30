@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+import { IonicStorageModule } from '@ionic/storage'
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { SingleTransactionPage } from '../pages/single-transaction/single-transaction';
@@ -22,7 +22,8 @@ import { UserRegisterPage } from '../pages/user-register/user-register';
     UserRegisterPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+      IonicModule.forRoot(MyApp),
+      IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -36,7 +37,6 @@ import { UserRegisterPage } from '../pages/user-register/user-register';
   ],
   providers: [
     TransactionService,
-    Storage,
     AuthService
   ]
 })
