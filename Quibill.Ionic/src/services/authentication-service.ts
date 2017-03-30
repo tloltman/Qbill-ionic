@@ -65,11 +65,13 @@ export class AuthService {
         return new Promise((resolveFunction, rejectFunction) =>
             this.storage.ready().then(
                 (storageReady) => {
-                    this.getUserIdFromStoragePromise()
-                    resolveFunction('success');
-            },
-                (error) => {
-                    console.log(error);
+                    this.getUserIdFromStoragePromise().then((userLoaded) => {
+                        resolveFunction('success2');
+                    },
+                        (loadUserError) => { console.log("there was a problem loading the user") }
+                    )},
+                (storageError) => {
+                    console.log(storageError);
                     rejectFunction('There was a problem accessing storage');
                 }
         ));
@@ -79,11 +81,13 @@ export class AuthService {
         return new Promise((resolveFunction, rejectFunction) =>
             this.storage.ready().then(
                 (storageReady) => {
-                    this.getUserIdForStoragePromise(CurrentUser);
-                    resolveFunction('success');
+                    this.getUserIdForStoragePromise(CurrentUser).then((userSaved) => {
+                        resolveFunction('success1')
+                    },
+                        (saveUserError) => { console.log('User not saved') });
                 },
-                (error) => {
-                    console.log(error);
+                (storageError) => {
+                    console.log(storageError);
                     rejectFunction('There was a problem accessing storage');
                 }
             ));

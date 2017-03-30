@@ -29,6 +29,7 @@ export class MyApp {
           },
           (error) => {
               console.log(error)
+              this.nav.setRoot(LoginPage);
           }
       );
 
