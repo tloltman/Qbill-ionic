@@ -15,9 +15,10 @@ export class AuthService {
 
     private userId: UserData = null;
     private _myServerRoot: string = AppSettings.serverUrl;
+    private _userAccessKey: string = AppSettings.userAccessKey;
 
     constructor(public storage: Storage, private http: Http) {
-        
+
     }
 
     registerUser(userEmail: string, userPassword: string, userConfirmPassword: string): Observable<any> {
@@ -51,14 +52,14 @@ export class AuthService {
 
     isUserLoggedIn(): boolean {
         if (this.userId) {
-                        return true;
+            return true;
         }
         else {
             return false;
         }
 
     }
- 
+
     getUserData(): UserData {
         return this.userId;
     }
@@ -66,7 +67,40 @@ export class AuthService {
         this.userId = new UserData(CurrentUser.userName, CurrentUser.access_token);
     }
 
+    loadUserFromStorage(): Promise<any> {
+
+        return new Promise((resolveFunction, rejectFunction) =>
+            this.storage.ready().then(
+                (storageReady) => {
+                    resolveFunction('success');
+                    this.userIDPromise()
+            },
+                (error) => {
+                    console.log(error);
+                    rejectFunction('There was a problem accessing storage');
+                }
+        ));
+    }
+
+    userIDPromise(): Promise<any> { //Helper method for loadUserFrom Storage
+        return new Promise((resolveFunction, rejectFunction) =>
+
+            this.storage.get(this._userAccessKey).then(
+                (gottenValue) => {
+                    this.userId = gottenValue;
+                    resolveFunction('success');
+                },
+                (error) => {
+                    console.log(error);
+                    rejectFunction('There was an error retrieving the user Id');
+                }
+            ));
+    }
+
+
 }
+
+
 
 export interface ILoginResponse {
 
