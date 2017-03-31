@@ -48,7 +48,7 @@ export class AuthService {
 
     logout() {
         this.userId = null;
-        this.storage.clear().then((success) => {console.log('storage cleared');});
+        this.storage.clear();
     }
 
     getUserData(): UserData {
@@ -88,7 +88,6 @@ export class AuthService {
                             if (gottenValue) {
                                 this.userId = newUser;
                                 resolveFunction('success');
-                                console.log(this.userId);
                             }
                         },
                         (error) => {
