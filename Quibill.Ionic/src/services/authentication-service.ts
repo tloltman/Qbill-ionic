@@ -13,7 +13,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class AuthService {
 
-    private userId: UserData = null;
+    public userId: UserData = null;
     private _myServerRoot: string = AppSettings.serverUrl;
     private _userAccessKey: string = AppSettings.userAccessKey;
 
@@ -48,12 +48,7 @@ export class AuthService {
 
     logout() {
         this.userId = null;
-
-        console.log('storage size before clear:');
-        this.storage.length().then((success) => { console.log(success) });
         this.storage.clear().then((success) => {console.log('storage cleared');});
-        console.log('storage size after clear:');
-        this.storage.length().then((success) => { console.log(success) });
     }
 
     getUserData(): UserData {
@@ -61,73 +56,52 @@ export class AuthService {
     }
 
     loadUserFromStorage(): Promise<any> {
-
         return new Promise((resolveFunction, rejectFunction) =>
             this.storage.ready().then(
                 (storageReady) => {
-                    this.getUserIdFromStoragePromise().then((userLoaded) => {
-                        resolveFunction('success2');
-                    },
-                        (loadUserError) => { console.log("there was a problem loading the user") }
-                    )},
+                    this.storage.get(this._userAccessKey).then(
+                        (gottenValue) => {
+                            if (gottenValue) {
+                                this.userId = gottenValue;
+                                resolveFunction('success');
+                            }
+                            else { rejectFunction('No user in storage') };
+                        },
+                        (error) => {
+                            rejectFunction('There was a problem loading the user.');
+                        });
+                },
                 (storageError) => {
                     console.log(storageError);
-                    rejectFunction('There was a problem accessing storage');
                 }
         ));
     }
 
     saveUserToStorage(CurrentUser: ILoginResponse): Promise<any> {
-        return new Promise((resolveFunction, rejectFunction) =>
-            this.storage.ready().then(
-                (storageReady) => {
-                    this.getUserIdForStoragePromise(CurrentUser).then((userSaved) => {
-                        resolveFunction('success1')
-                    },
-                        (saveUserError) => { console.log('User not saved') });
-                },
-                (storageError) => {
-                    console.log(storageError);
-                    rejectFunction('There was a problem accessing storage');
-                }
-            ));
-
-    }
-
-    getUserIdForStoragePromise(CurrentUser: ILoginResponse): Promise<any> {
         var newUser = new UserData(CurrentUser.userName, CurrentUser.access_token);
 
         return new Promise((resolveFunction, rejectFunction) =>
-            this.storage.set(AppSettings.userAccessKey, newUser).then(
-                (gottenValue) => {
-                    this.userId = newUser;
+            this.storage.ready().then(
+                (storageReady) => {
+                    this.storage.set(AppSettings.userAccessKey, newUser).then(
+                        (gottenValue) => {
+                            if (gottenValue) {
+                                this.userId = newUser;
+                                resolveFunction('success');
+                                console.log(this.userId);
+                            }
+                        },
+                        (error) => {
+                            console.log('There was a problem saving the user')
+                            rejectFunction('There was a problem saving the user');
+                        });
                 },
-                (error) => {
-                    console.log(error);
-                    rejectFunction('There was an error getting the user Data')
-                }
-        ));
-
-
-    }
-
-
-    getUserIdFromStoragePromise(): Promise<any> { //Helper method for loadUserFrom Storage
-        return new Promise((resolveFunction, rejectFunction) =>
-
-            this.storage.get(this._userAccessKey).then(
-                (gottenValue) => {
-                    this.userId = gottenValue;
-                    resolveFunction('success');
-                },
-                (error) => {
-                    console.log(error);
-                    rejectFunction('There was an error retrieving the user Id');
+                (storageError) => {
+                    console.log(storageError);
                 }
             ));
+
     }
-
-
 }
 
 

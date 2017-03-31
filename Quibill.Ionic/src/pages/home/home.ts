@@ -14,7 +14,7 @@ import { AuthService } from '../../services/authentication-service';
 export class HomePage {
     remainingBudgetDollars: number;
     nextPayDate: string;
-    //currentUserName: string = this.authService.getUserData().getCurrentUserName;
+    currentUserName: string;
   
     constructor(public navCtrl: NavController, public menuCtrl: MenuController, public authService: AuthService) {
         this.remainingBudgetDollars = 0.00;
@@ -22,7 +22,9 @@ export class HomePage {
 
     ionViewDidEnter() {
         this.menuCtrl.enable(true);
+        this.currentUserName = this.authService.getUserData().getCurrentUserName;
     }
+
 
     transactionType = Object.freeze({
       Withdrawal: 'Withdrawal',

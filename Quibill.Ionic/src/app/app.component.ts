@@ -13,6 +13,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = LoginPage;
+  currentUser: string;
  
 
   pages: Array<{title: string, component: any}>;
@@ -20,16 +21,17 @@ export class MyApp {
   constructor(public platform: Platform, private authService: AuthService) {
       this.initializeApp();
 
-      this.rootPage = LoginPage;
-
       authService.loadUserFromStorage().then(
           (gottenValue) => {
-              console.log('This shouldn\'t load: ' + gottenValue);
-              this.nav.setRoot(HomePage);
+              if (gottenValue) {
+                  this.nav.setRoot(HomePage);
+              }
+              else {
+                  console.log('User is null');
+              }
           },
           (error) => {
               console.log(error)
-              this.nav.setRoot(LoginPage);
           }
       );
 
