@@ -22,7 +22,7 @@ export class HomePage {
 
     ionViewDidEnter() {
         this.menuCtrl.enable(true);
-        this.currentUserName = this.authService.getUserData().getCurrentUserName;
+        this.currentUserName = this.authService.getUserData().currentUserName;
     }
 
 

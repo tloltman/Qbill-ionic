@@ -1,7 +1,7 @@
 ﻿export class UserData {
 
-    private currentUserName: string;
-    private currentUserToken: string;
+    public currentUserName: string;
+    public currentUserToken: string;
 
 
     constructor(userName: string, userToken: string) {
@@ -9,11 +9,4 @@
         this.currentUserToken = userToken;
     }
 
-    get getCurrentUserName(): string {
-        return this.currentUserName;
-    }
-
-    get getCurrentUserToken(): string {
-        return this.currentUserToken
-    }
 }

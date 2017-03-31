@@ -13,7 +13,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class AuthService {
 
-    private userId: UserData = null;
+    private userId: UserData;
     private _myServerRoot: string = AppSettings.serverUrl;
     private _userAccessKey: string = AppSettings.userAccessKey;
 
