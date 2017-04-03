@@ -13,11 +13,12 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class AuthService {
 
-    private userId: UserData = null;
+    private userId: UserData;
     private _myServerRoot: string = AppSettings.serverUrl;
+    private _userAccessKey: string = AppSettings.userAccessKey;
 
     constructor(public storage: Storage, private http: Http) {
-        
+
     }
 
     registerUser(userEmail: string, userPassword: string, userConfirmPassword: string): Observable<any> {
@@ -47,26 +48,62 @@ export class AuthService {
 
     logout() {
         this.userId = null;
+        this.storage.clear();
     }
 
-    isUserLoggedIn(): boolean {
-        if (this.userId) {
-                        return true;
-        }
-        else {
-            return false;
-        }
-
-    }
- 
     getUserData(): UserData {
         return this.userId;
     }
-    setUserData(CurrentUser: ILoginResponse) {
-        this.userId = new UserData(CurrentUser.userName, CurrentUser.access_token);
+
+    loadUserFromStorage(): Promise<any> {
+        return new Promise((resolveFunction, rejectFunction) =>
+            this.storage.ready().then(
+                (storageReady) => {
+                    this.storage.get(this._userAccessKey).then(
+                        (gottenValue) => {
+                            if (gottenValue) {
+                                this.userId = gottenValue;
+                                resolveFunction('success');
+                            }
+                            else { rejectFunction('No user in storage') };
+                        },
+                        (error) => {
+                            rejectFunction('There was a problem loading the user.');
+                        });
+                },
+                (storageError) => {
+                    console.log(storageError);
+                }
+        ));
     }
 
+    saveUserToStorage(CurrentUser: ILoginResponse): Promise<any> {
+        var newUser = new UserData(CurrentUser.userName, CurrentUser.access_token);
+
+        return new Promise((resolveFunction, rejectFunction) =>
+            this.storage.ready().then(
+                (storageReady) => {
+                    this.storage.set(AppSettings.userAccessKey, newUser).then(
+                        (gottenValue) => {
+                            if (gottenValue) {
+                                this.userId = newUser;
+                                resolveFunction('success');
+                            }
+                        },
+                        (error) => {
+                            console.log('There was a problem saving the user')
+                            rejectFunction('There was a problem saving the user');
+                        });
+                },
+                (storageError) => {
+                    console.log(storageError);
+                }
+            ));
+
+    }
 }
+
+
 
 export interface ILoginResponse {
 
