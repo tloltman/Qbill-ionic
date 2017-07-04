@@ -34,7 +34,7 @@ export class TransactionService {
 
     let headers = new Headers({
         'Content-Type': 'application/json; charset=utf-8',
-        'Authorization': 'Bearer ' + this.authService.getToken
+        'Authorization': 'Bearer ' + this.authService.getUserData().currentUserToken
     });
     let options = new RequestOptions({ headers: headers });
 
