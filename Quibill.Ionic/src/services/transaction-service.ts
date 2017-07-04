@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
+import { AppSettings } from '../app-settings';
 
 import { Storage } from '@ionic/storage';
+
 
 @Injectable()
 export class TransactionService {
