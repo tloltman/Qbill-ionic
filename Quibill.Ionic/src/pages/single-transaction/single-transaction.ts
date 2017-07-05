@@ -32,8 +32,6 @@ export class SingleTransactionPage {
   }
 
   submitTransaction() {
-   
-      this.navCtrl.popToRoot();
 
       this.transactionService.addSingleTransaction(this.amount, this.note, this.startDate, this.transactionType).subscribe(
           data => {
