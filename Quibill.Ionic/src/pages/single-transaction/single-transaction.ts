@@ -15,6 +15,8 @@ import { TransactionService } from '../../services/transaction-service';
 })
 export class SingleTransactionPage {
 
+  public errors: any = [];
+
   public transactionType: string;
 
   public amount: number;
@@ -30,8 +32,16 @@ export class SingleTransactionPage {
   }
 
   submitTransaction() {
-    this.transactionService.addSingleTransaction(this.amount, this.note, this.startDate, this.transactionType);
-    this.navCtrl.popToRoot();
+
+      this.transactionService.addSingleTransaction(this.amount, this.note, this.startDate, this.transactionType).subscribe(
+          data => {
+              this.navCtrl.popToRoot();
+          },
+          error => {
+              console.log(error);
+              this.errors = [''];
+              this.errors.push(error)
+          });
   }
 
 }

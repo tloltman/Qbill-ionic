@@ -1,35 +1,45 @@
 import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
+import { AppSettings } from '../app-settings';
 
 import { Storage } from '@ionic/storage';
+import { AuthService } from '../services/authentication-service';
+import { SingleTransaction } from '../shared/SingleTransaction';
 
 @Injectable()
 export class TransactionService {
 
+  private _myServerRoot: string = AppSettings.serverUrl;
+
   transactions = [];
 
-  constructor(public storage: Storage) {
+  constructor(public storage: Storage, private http: Http, public authService: AuthService) {
     this.loadTransactions();
   }
   
-  addSingleTransaction(amount: number, note: string, date: string, type: string) {
-    let newTransaction = {
-      amount: amount,
-      note: note,
-      date: date,
-      type: type
-    };
+  addSingleTransaction(amount: number, note: string, date: string, type: string): Observable<any> {
+      let newSingleTransaction = new SingleTransaction(amount, note, date, type);
 
     this.storage.get("transactions").then((storedData) => {
       let storedTransactions = JSON.parse(storedData);
       if(storedTransactions && Array.isArray(storedTransactions)) {
         this.transactions = storedTransactions;
       }
-      this.transactions.push(newTransaction);
+      this.transactions.push(newSingleTransaction);
       this.storeTransactions();
       console.log("New transaction added");
+
+      });
+
+    let headers = new Headers({
+        'Content-Type': 'application/json; charset=utf-8',
+        'Authorization': 'Bearer ' + this.authService.getUserData().currentUserToken
     });
+    let options = new RequestOptions({ headers: headers });
 
-
+    return this.http.post(this._myServerRoot + '/api/Transactions', JSON.stringify(newSingleTransaction), options)
+        .catch((error: any) => Observable.throw(error.json().error_description || 'Server error')); //...errors if any
   }
   
   loadTransactions() {
